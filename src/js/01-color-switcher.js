@@ -7,6 +7,16 @@ let myInterval = 'null';
 
 stopBtn.disabled = true;
 
+stopBtn.style.width = '70px';
+stopBtn.style.height = '40px';
+stopBtn.style.textTransform = 'uppercase';
+
+startBtn.style.width = '70px';
+startBtn.style.height = '40px';
+startBtn.style.textTransform = 'uppercase';
+
+startBtn.style.marginRight = '10px';
+
 const startClick = () => {
   myInterval = setInterval(() => {
     console.log('start');
