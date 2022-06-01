@@ -4,12 +4,12 @@ import 'flatpickr/dist/flatpickr.min.css';
 const inputEl = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
 let myTimer = 'null';
-let CHOSEN_DATE = '';
+let CHOSEN_DATE;
 let CURRENT_DATE = new Date();
-const days = document.querySelector('[data-days]');
-const hours = document.querySelector('[data-hours]');
-const minutes = document.querySelector('[data-minutes]');
-const seconds = document.querySelector('[data-seconds]');
+const daysMy = document.querySelector('[data-days]');
+const hoursMy = document.querySelector('[data-hours]');
+const minutesMy = document.querySelector('[data-minutes]');
+const secondsMy = document.querySelector('[data-seconds]');
 
 startBtn.addEventListener('click', startTimer);
 
@@ -27,8 +27,15 @@ const options = {
       window.alert('Please choose a date in the future');
     } else {
       startBtn.disabled = false;
+      console.log('you chose: ', selectedDates[0]);
+      //   const date = new Date(selectedDates[0]);
+      //   console.log('date', date.getTime());
+      //   CHOSEN_DATE = selectedDates[0].getTime();
+
       CHOSEN_DATE = selectedDates[0];
-      return CHOSEN_DATE;
+      console.log('you choses date: ', CHOSEN_DATE);
+
+      //   return selectedDates[0];
     }
   },
 };
@@ -38,13 +45,9 @@ flatpickr('#datetime-picker', options);
 function startTimer(CHOSEN_DATE) {
   console.log('timer starts');
   console.log('here..', CHOSEN_DATE);
-  //   let n = flatpickr.parseDate(selectedDates[0], 'Y-m-d h:i K');
-  //   console.log('date: ', n);
-  // console.log(selectedDates[0].getDay());
-  days.textContent = '';
 
   myTimer = setInterval(() => {
-    console.log(`I love async JS!  ${Math.random()}`);
+    // console.log(`I love async JS!  ${Math.random()}`);
   }, 1000);
 }
 
@@ -70,3 +73,30 @@ function convertMs(ms) {
 function addLeadingZero(value) {
   //padStart()
 }
+
+////////////////////////////////
+
+const timer = targetDate => {
+  setInterval(() => {
+    const delta = new Date(targetDate) - new Date();
+    // console.log('CHOSEN_DATE', targetDate);
+    // console.log('new Date', new Date());
+    // console.log('delta', delta);
+
+    renderTimer(delta);
+  }, 1000);
+};
+
+timer(new Date('2022 / 06 / 02'));
+console.log('h', new Date('2022 / 06 / 02'));
+// timer(new Date(CHOSEN_DATE));
+
+const renderTimer = string => {
+  //   console.log('string', string);
+  let { days, hours, minutes, seconds } = convertMs(string);
+  daysMy.textContent = days;
+  minutesMy.textContent = minutes;
+  hoursMy.textContent = hours;
+  secondsMy.textContent = seconds;
+  //   console.log(convertMs(string));
+};
