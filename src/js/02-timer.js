@@ -3,7 +3,6 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const startBtn = document.querySelector('[data-start]');
 let CURRENT_DATE = new Date();
-let SELECTED_DATE = new Date();
 const daysMy = document.querySelector('[data-days]');
 const hoursMy = document.querySelector('[data-hours]');
 const minutesMy = document.querySelector('[data-minutes]');
@@ -29,7 +28,7 @@ flatpickr('#datetime-picker', options);
 
 const timer = targetDate => {
   return function () {
-    setInterval(() => {
+    const myInt = setInterval(() => {
       const delta = new Date(targetDate) - new Date();
       renderTimer(delta);
     }, 1000);
@@ -48,13 +47,35 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
+function addLeadingZero(value) {
+  if (value < 10) {
+    return `${value}`.padStart(2, '0');
+  }
+  return value;
+}
+
 const renderTimer = string => {
   let { days, hours, minutes, seconds } = convertMs(string);
-  daysMy.textContent = days;
-  minutesMy.textContent = minutes;
-  hoursMy.textContent = hours;
-  secondsMy.textContent = seconds;
+  daysMy.textContent = addLeadingZero(days);
+  minutesMy.textContent = addLeadingZero(minutes);
+  hoursMy.textContent = addLeadingZero(hours);
+  secondsMy.textContent = addLeadingZero(seconds);
+
+  //   if (
+  //     daysMy.textContent === '00' &&
+  //     minutesMy.textContent === '00' &&
+  //     hoursMy.textContent === '00' &&
+  //     secondsMy.textContent === '00'
+  //   ) {
+  //     console.log('0');
+  //     clearInterval(myInt);
+  //   }
 };
+
+//// style
+
+// const value = document.querySelectorAll('.value');
+// value.style.color = 'aqua';
 
 // function startTimer(f) {
 //   myTimer = setInterval(() => {

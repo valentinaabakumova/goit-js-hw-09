@@ -21,3 +21,14 @@ img {
   display: flex;
   justify-content: center;
 }
+
+.value {
+  font-size: 40px;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.timer {
+  display: flex;
+  margin-top: 20px;
+}
