@@ -5,12 +5,15 @@ const amount = document.querySelector('[name=amount]');
 let position = 0;
 let timer = 'null';
 form.addEventListener('submit', onFormSubmit);
-let s = step.value;
+// let s = Number(step.value);
+
+// let s2 = Number(step.value);
 function onFormSubmit(e) {
   e.preventDefault();
 
   const firsrTimer = setTimeout(() => {
     for (let i = 0; i < amount.value; i += 1) {
+      const s = +delay.value + +step.value * i;
       position = i;
       createPromise(position, s)
         .then(({ position, delay }) => {
@@ -19,7 +22,8 @@ function onFormSubmit(e) {
         .catch(({ position, delay }) => {
           console.log(`❌ Rejected promise ${position} in ${delay} ms`);
         });
-      s += step.value;
+      // Number(step.value);
+      // s += step.value;
     }
   }, delay.value);
 }

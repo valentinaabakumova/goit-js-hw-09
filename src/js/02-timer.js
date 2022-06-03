@@ -5,7 +5,6 @@ const inputEl = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
 let myTimer = 'null';
 let d;
-let f;
 let CURRENT_DATE = new Date();
 const daysMy = document.querySelector('[data-days]');
 const hoursMy = document.querySelector('[data-hours]');
